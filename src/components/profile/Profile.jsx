@@ -22,7 +22,7 @@ function Profile() {
 
 	const getData = async () => {
 		setLoading(true);
-		const res = await fetch(`http://localhost:3000/api/user-profile`, {
+		const res = await fetch(`${process.env.PROD_URL}/api/user-profile`, {
 			cache: "no-store",
 		});
 
@@ -43,7 +43,7 @@ function Profile() {
 	}
 	const deletePost = async (id) => {
 		setLoading(true);
-		const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+		const res = await fetch(`${process.env.PROD_URL}/api/posts/${id}`, {
 			method: "DELETE",
 		});
 		if (!res.ok) {
