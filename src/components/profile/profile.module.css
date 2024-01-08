@@ -1,0 +1,84 @@
+.image {
+	border-radius: 50%;
+}
+.container {
+	/* width: 70%; */
+}
+.title {
+	margin-bottom: 50px;
+}
+.profileInfoContainer {
+	display: flex;
+	gap: 30px;
+	margin-bottom: 100px;
+}
+.profileNameAndEmail {
+	display: flex;
+	flex-direction: column;
+	padding-top: 20px;
+	justify-content: flex-start;
+	gap: 10px;
+}
+.profileNameAndEmail .name {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.profileNameAndEmail .email {
+	font-size: 16px;
+}
+
+.profileImageContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 10px;
+}
+.statsContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	gap: 10px;
+}
+
+.stats {
+	font-size: 20px;
+}
+
+.Statsspan {
+	font-size: 24px;
+	font-weight: bold;
+}
+.button {
+	padding: 16px 20px;
+	background-color: whitesmoke;
+	color: black;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.posts {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+.postContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	border: 2px solid rgb(112, 108, 108);
+	border-radius: 20px;
+	padding: 20px;
+}
+.Deletebutton {
+	padding: 16px 20px;
+	background-color: red;
+	color: white;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
