@@ -14,11 +14,12 @@ import {
 } from "firebase/storage";
 import { app } from "@/utils/firebase";
 import ReactQuill from "react-quill";
+import Loader from "../loader/Loader";
 
 const EditorPage = () => {
 	const { status } = useSession();
 	const router = useRouter();
-
+	const [loading, setLoading] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [file, setFile] = useState(null);
 	const [media, setMedia] = useState("");
@@ -34,7 +35,7 @@ const EditorPage = () => {
 			const storageRef = ref(storage, name);
 
 			const uploadTask = uploadBytesResumable(storageRef, file);
-
+			setLoading(true);
 			uploadTask.on(
 				"state_changed",
 				(snapshot) => {
@@ -61,6 +62,7 @@ const EditorPage = () => {
 				}
 			);
 			setOpen(false);
+			setLoading(false);
 		};
 
 		file && upload();
@@ -69,7 +71,9 @@ const EditorPage = () => {
 	if (status === "loading") {
 		return <div className={styles.loading}>Loading...</div>;
 	}
-
+	// if (loading) {
+	// 	<Loader />;
+	// }
 	if (status === "unauthenticated") {
 		router.push("/");
 	}
@@ -83,6 +87,7 @@ const EditorPage = () => {
 			.replace(/^-+|-+$/g, "");
 
 	const handleSubmit = async () => {
+		setLoading(true);
 		const res = await fetch("/api/posts", {
 			method: "POST",
 			body: JSON.stringify({
@@ -95,6 +100,7 @@ const EditorPage = () => {
 		});
 
 		if (res.status === 200) {
+			setLoading(false);
 			const data = await res.json();
 			router.push(`/posts/${data.slug}`);
 		}
@@ -169,7 +175,10 @@ const EditorPage = () => {
 					placeholder='Tell your story...'
 				/>
 			</div>
-			<button className={styles.publish} onClick={handleSubmit}>
+			<button
+				className={styles.publish}
+				onClick={handleSubmit}
+				disabled={loading}>
 				Publish
 			</button>
 		</div>
