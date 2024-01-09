@@ -27,7 +27,7 @@ function Profile() {
 		});
 
 		if (!res.ok) {
-			console.log(res);
+			console.log(res.json());
 			throw new Error("Failed");
 		}
 		const data = await res.json();
@@ -44,7 +44,7 @@ function Profile() {
 	}
 	const deletePost = async (id) => {
 		setLoading(true);
-		const res = await fetch(`${process.env.PROD_URL}/api/posts/${id}`, {
+		const res = await fetch(`/api/posts/${id}`, {
 			method: "DELETE",
 		});
 		if (!res.ok) {
