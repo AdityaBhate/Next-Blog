@@ -22,7 +22,7 @@ function Profile() {
 
 	const getData = async () => {
 		setLoading(true);
-		const res = await fetch(`${process.env.PROD_URL}/api/user-profile`, {
+		const res = await fetch(`/api/user-profile`, {
 			cache: "no-store",
 		});
 
