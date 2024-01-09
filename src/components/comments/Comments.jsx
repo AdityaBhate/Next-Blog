@@ -33,7 +33,7 @@ const Comments = ({ postSlug }) => {
 
 	const handleSubmit = async () => {
 		setLoading(true);
-		await fetch("/api/comments", {
+		await fetch(`${process.env.PROD_URL}/api/comments`, {
 			method: "POST",
 			body: JSON.stringify({ desc, postSlug }),
 		});
