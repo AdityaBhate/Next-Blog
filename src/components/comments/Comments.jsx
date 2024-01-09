@@ -21,7 +21,6 @@ const fetcher = async (url) => {
 };
 
 const Comments = ({ postSlug }) => {
-	const [loading, setLoading] = useState(false);
 	const { status } = useSession();
 
 	const { data, mutate, isLoading } = useSWR(
@@ -32,12 +31,10 @@ const Comments = ({ postSlug }) => {
 	const [desc, setDesc] = useState("");
 
 	const handleSubmit = async () => {
-		setLoading(true);
 		await fetch(`${process.env.PROD_URL}/api/comments`, {
 			method: "POST",
 			body: JSON.stringify({ desc, postSlug }),
 		});
-		setLoading(false);
 		mutate();
 	};
 
@@ -51,10 +48,7 @@ const Comments = ({ postSlug }) => {
 						className={styles.input}
 						onChange={(e) => setDesc(e.target.value)}
 					/>
-					<button
-						className={styles.button}
-						onClick={handleSubmit}
-						disabled={loading}>
+					<button className={styles.button} onClick={handleSubmit}>
 						Send
 					</button>
 				</div>
