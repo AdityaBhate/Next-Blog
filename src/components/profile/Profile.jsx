@@ -27,6 +27,7 @@ function Profile() {
 		});
 
 		if (!res.ok) {
+			console.log(res);
 			throw new Error("Failed");
 		}
 		const data = await res.json();

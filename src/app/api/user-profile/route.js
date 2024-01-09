@@ -10,6 +10,7 @@ export const GET = async () => {
 			JSON.stringify({ message: "Not Authenticated!" }, { status: 401 })
 		);
 	}
+
 	try {
 		const user = await prisma.user.findUnique({
 			where: { email: session.user.email },
@@ -20,7 +21,7 @@ export const GET = async () => {
 	} catch (error) {
 		console.log(error);
 		return new NextResponse(
-			JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+			JSON.stringify({ message: error }, { status: 500 })
 		);
 	}
 };
