@@ -86,19 +86,16 @@ const EditorPage = () => {
 
 	const handleSubmit = async () => {
 		setLoading(true);
-		const res = await fetch(
-			`${process.env.PROD_URL}/api/categories/api/posts`,
-			{
-				method: "POST",
-				body: JSON.stringify({
-					title,
-					desc: value,
-					img: media,
-					slug: slugify(title),
-					catSlug: catSlug || "coding",
-				}),
-			}
-		);
+		const res = await fetch(`/api/posts`, {
+			method: "POST",
+			body: JSON.stringify({
+				title,
+				desc: value,
+				img: media,
+				slug: slugify(title),
+				catSlug: catSlug || "coding",
+			}),
+		});
 
 		if (res.status === 200) {
 			setLoading(false);
