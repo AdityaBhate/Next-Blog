@@ -31,7 +31,7 @@ const Comments = ({ postSlug }) => {
 	const [desc, setDesc] = useState("");
 
 	const handleSubmit = async () => {
-		await fetch(`${process.env.PROD_URL}/api/comments`, {
+		await fetch(`/api/comments`, {
 			method: "POST",
 			body: JSON.stringify({ desc, postSlug }),
 		});
