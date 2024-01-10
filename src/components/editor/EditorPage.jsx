@@ -71,9 +71,7 @@ const EditorPage = () => {
 	if (status === "loading") {
 		return <div className={styles.loading}>Loading...</div>;
 	}
-	// if (loading) {
-	// 	<Loader />;
-	// }
+
 	if (status === "unauthenticated") {
 		router.push("/");
 	}
@@ -127,24 +125,15 @@ const EditorPage = () => {
 				<option value='coding'>coding</option>
 			</select>
 
-			{uploadProgress !== 0 && uploadProgress !== 100 && (
-				<div
-					className={styles.loading}
-					style={{
-						width: "100%",
-						height: "20px",
-						backgroundColor: "#f2f2f2",
-						borderRadius: "4px",
-						marginTop: "10px",
-					}}>
-					<div
-						style={{
-							width: `${uploadProgress.toFixed(0)}%`,
-							height: "100%",
-							backgroundColor: "#007bff",
-							borderRadius: "4px",
-							transition: "width 0.3s ease-in-out",
-						}}></div>
+			{media && (
+				<div className={styles.media}>
+					<Image
+						className={styles.imagePreview}
+						src={media}
+						alt=''
+						width={200}
+						height={200}
+					/>
 				</div>
 			)}
 
