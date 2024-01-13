@@ -48,3 +48,27 @@ export const POST = async (req) => {
 		);
 	}
 };
+
+export const DELETE = async (req) => {
+	const session = await getAuthSession();
+
+	if (!session) {
+		return new NextResponse(
+			JSON.stringify({ message: "Not Authenticated!" }, { status: 401 })
+		);
+	}
+
+	try {
+		const { id } = await req.json();
+		const comment = await prisma.comment.delete({
+			where: { id },
+		});
+
+		return new NextResponse(JSON.stringify("Comment Deleted", { status: 200 }));
+	} catch (err) {
+		console.log(err);
+		return new NextResponse(
+			JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
+		);
+	}
+};

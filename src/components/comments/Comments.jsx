@@ -22,7 +22,6 @@ const fetcher = async (url) => {
 
 const Comments = ({ postSlug }) => {
 	const { status } = useSession();
-
 	const { data, mutate, isLoading } = useSWR(
 		`/api/comments?postSlug=${postSlug}`,
 		fetcher
@@ -36,6 +35,22 @@ const Comments = ({ postSlug }) => {
 			body: JSON.stringify({ desc, postSlug }),
 		});
 		mutate();
+		setDesc("");
+	};
+	const handleDelete = async (id) => {
+		await fetch(`/api/comments`, {
+			method: "DELETE",
+			body: JSON.stringify({ id }),
+		});
+		mutate();
+		setDesc("");
+	};
+
+	const sortComments = (comments, userEmail) => {
+		comments.sort((a, b) => (a.userEmail === userEmail ? -1 : 1));
+		comments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+		return comments;
 	};
 
 	return (
@@ -55,32 +70,53 @@ const Comments = ({ postSlug }) => {
 			) : (
 				<Link href='/login'>Login to write a comment</Link>
 			)}
-			<div className={styles.comments}>
-				{isLoading
-					? "loading"
-					: data?.map((item) => (
-							<div className={styles.comment} key={item._id}>
-								<div className={styles.user}>
-									{item?.user?.image && (
-										<Image
-											src={item.user.image}
-											alt=''
-											width={50}
-											height={50}
-											className={styles.image}
-										/>
-									)}
-									<div className={styles.userInfo}>
-										<span className={styles.username}>{item.user.name}</span>
-										<span className={styles.date}>{item.createdAt}</span>
-									</div>
-								</div>
-								<p className={styles.desc}>{item.desc}</p>
-							</div>
-					  ))}
-			</div>
+			{isLoading ? (
+				"loading..."
+			) : (
+				<Comment
+					commentsData={sortComments(data, data.userEmail)}
+					handleDelete={handleDelete}
+				/>
+			)}
 		</div>
 	);
 };
 
 export default Comments;
+
+const Comment = ({ commentsData, handleDelete }) => {
+	const { data, status } = useSession();
+	return (
+		<div className={styles.comments}>
+			{commentsData?.map((item) => (
+				<div className={styles.commentBox} key={item._id}>
+					<div className={styles.comment}>
+						<div className={styles.user}>
+							{item?.user?.image && (
+								<Image
+									src={item.user.image}
+									alt=''
+									width={50}
+									height={50}
+									className={styles.image}
+								/>
+							)}
+							<div className={styles.userInfo}>
+								<span className={styles.username}>{item.user.name}</span>
+								<span className={styles.date}>{item.createdAt}</span>
+							</div>
+						</div>
+						<p className={styles.desc}>{item.desc}</p>
+					</div>
+					{data.user.email === item.user.email && (
+						<button
+							className={styles.deleteButton}
+							onClick={() => handleDelete(item.id)}>
+							Delete
+						</button>
+					)}
+				</div>
+			))}
+		</div>
+	);
+};
