@@ -82,3 +82,12 @@
 	border-radius: 5px;
 	cursor: pointer;
 }
+.Editbutton {
+	padding: 16px 20px;
+	background-color: rgb(50, 50, 243);
+	color: white;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}

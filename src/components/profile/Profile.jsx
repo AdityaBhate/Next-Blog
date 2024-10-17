@@ -54,6 +54,10 @@ function Profile() {
 		setLoading(false);
 	};
 
+	const editPost = (id) => {
+		router.push(`/edit/${id}`);
+	};
+
 	if (loading) {
 		return <Loader />;
 	}
@@ -103,6 +107,11 @@ function Profile() {
 								className={styles.Deletebutton}
 								onClick={() => deletePost(item.id)}>
 								Delete
+							</button>
+							<button
+								className={styles.Editbutton}
+								onClick={() => editPost(item.id)}>
+								Edit
 							</button>
 						</div>
 					))}
