@@ -24,6 +24,7 @@ const EditPage = () => {
 			setLoading(true);
 			const res = await fetch(`/api/posts/${slug}`);
 			const data = await res.json();
+			console.log(data);
 			setPost(data);
 			setTitle(data.title);
 			setValue(data.desc);

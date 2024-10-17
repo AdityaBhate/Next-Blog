@@ -11,14 +11,12 @@ const Featured = () => {
 					<Image src='/coffee.png' alt='' fill className={styles.image} />
 				</div>
 				<div className={styles.textContainer}>
-					<h1 className={styles.postTitle}>
-						Lorem ipsum dolor sit amet alim consectetur adipisicing elit.
-					</h1>
+					<h1 className={styles.postTitle}>Welcome to Our Blog Platform</h1>
 					<p className={styles.postDesc}>
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-						Cupiditate, quam nisi magni ea laborum inventore voluptatum
-						laudantium repellat ducimus unde aspernatur fuga. Quo, accusantium
-						quisquam! Harum unde sit culpa debitis.
+						Discover a seamless blogging experience with our platform. Create,
+						edit, and manage your posts effortlessly. Enjoy features like CRUD
+						operations, user authentication, categorized content, and a rich
+						text editor for a smooth writing journey.
 					</p>
 				</div>
 			</div>
