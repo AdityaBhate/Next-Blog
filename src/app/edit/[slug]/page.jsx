@@ -6,8 +6,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
-import styles from "./editorPage.module.css";
-import Loader from "../loader/Loader";
+import styles from "../../../components/editor/editorPage.module.css";
 
 const EditPage = () => {
 	const { status } = useSession();
